@@ -17,7 +17,7 @@ while ERROR:
     tamanho_sheets = len ( sheets )
     for i in range(tamanho_sheets):
         print(f'[{i}] ' + sheets[i] )
-    sn = int ( input ( 'informe qual aba deseja coletar os dados: '))
+    sn = int ( input ( 'informe qual aba deseja coletar os dados: ').upper())
 
     arquivo_pd = pd.read_excel ( arquivo, sheet_name= sn )
     arquivo_df = pd.DataFrame ( arquivo_pd )
@@ -29,11 +29,12 @@ while ERROR:
 
     except:
         ERROR = False
-        exit(f'O valor fornecido no cabeçário é inválido {34}')
+        exit(f'O valor fornecido no cabeçário é inválido {1}')
 
 
     curso = str ( input ( 'informe o curso: ' ) ).strip ()
     promovido = str ( input ( "forneça o nome de quem esta promovendo o evento: " ) ).strip ()
+    local = input('forneça o nome da organização/empresa que disponibilizou o curso: ')
     dia = str ( input ( 'Informe da data do curso (dd/mm/aaaa): ' ) )
     horas = str ( input ( 'Informe as horas do curso: ' ) ).strip ()
 
@@ -41,7 +42,7 @@ while ERROR:
         nome_arquivo = input("informe o nome que deseja para o seu arquivo: ")
         with open ( f'{nome_arquivo}.doc', 'w' ) as aq :
             for nome in nomes :
-                texto = f"Certificamos que {nome} participou do {curso}, promovido {promovido} da Universidade Federal do Rio Grande – FURG no dia {dia}, completando {horas} horas de atividades."
+                texto = f"Certificamos que {nome} participou do {curso}, promovido {promovido} por {local} no dia {dia}, completando {horas} horas de atividades."
                 aq.write ( texto )
                 aq.write ( '\n' * 20 )
     except PermissionError :
